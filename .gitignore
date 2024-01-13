@@ -1,0 +1,17 @@
+cfs32
+compile32
+compile64
+out32_5000_50_5.ds2
+result
+runcfs32
+runcfs64
+sseutils32.o
+sseutils32.nasm
+sseutils64.o
+sseutils64.nasm
+test_5000_50_5_32.os
+test_5000_50_5_32.ds
+test_5000_50_5_32.labels
+test_5000_50_5_64.os
+test_5000_50_5_64.ds
+test_5000_50_5_64.labels

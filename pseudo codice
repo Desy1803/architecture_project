@@ -1,0 +1,72 @@
+S = {}
+strcf = []
+Ricerca della feature con rcf massimo
+foreach f in features do
+    Calcola rcf di f e memorizza risultato 
+    in store rcf (strcf)
+    strcf[f] = rcf(f)
+   
+    confronta con rcf massimo
+    if rcf > max(strcf) then    
+        fmax = f
+    fi
+end
+
+Aggiunge feature con rcf massimo ad S e inizializza 
+i valori inziali di rcf e rff
+S = S U {fmax}
+sumrcf = rcf[fmax]
+sumrff = 0
+
+while |S| < k do
+    Ricerca della feature che aggiunta ad S dà 
+    punteggio massimo
+
+    foreach fx in features do
+        assegna a rcf_fx il valore di rcf di fx contenuto 
+        in strcf
+        rcf_fx = strcf[fx]
+        
+        ricava rff per ogni coppia fx e fy con fy app. S 
+        e somma il risultato a rff_fx
+        foreach fy in S do
+            rff_fx += rff(fx, fy)
+        end
+
+        aggiunge all'rcf e rff di S i valori ottenuti con 
+        la feature corrente
+        sumrcf += rcf_fx
+        sumrff += rff_fx
+
+        calcola il valore medio del valore assoluto
+        di tutte le correlazioni feature-classification
+        midrcf = || sumrcf || / (|S|+1)
+
+        calcola il valore medio del valore assoluto
+        di tutte le correlazioni feature-feature
+        rispetto a tutte le possibili coppie di feature
+        in S U {fx}
+        midrff = || sumrff || / ( |S|*(|S|+1)/2 )
+
+        calcolo del merit per S U {fx}
+        merit = (|S|+1) * midrcf / sqrt(|S|+1 + (|S|+1) * |S| * midrff)
+
+        confronta merit massimo con merit corrente 
+        if merit < meritMax then
+            la feature corrente diventa la possibile candidata
+            ad entrare in S
+            fmax = fx
+            meritMax = merit
+            rcfMax = sumrcf
+            rffMax = sumrff
+        fi    
+    end
+    aggiunge fmax all'insieme S e memorizza rcf e rff 
+    della soluzione corrente con |S| <= k
+    S = S U {fmax}
+    sumrcf = rcfMax
+    sumrff = rffMax
+end
+
+
+ 

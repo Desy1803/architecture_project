@@ -1,0 +1,4 @@
+gcc -o result cfs32c.C
+./result -ds test_5000_50_32.ds -labels test_5000_50_32.labels -k 5 -d
+
+nasm -f elf32 cfs32.nasm && gcc -m32 -msse -O0 -no-pie sseutils32.o cfs32.o cfs32c.c -o cfs32c -lm && ./cfs32c -ds test_5000_50_32.ds -labels test_5000_50_32.labels -k 5 -d
